@@ -1,0 +1,115 @@
+# Ensemble Configuration for v1 + v2 Model Switching
+#
+# Strategy: Regime-based switching between momentum (v1) and defensive (v2) models
+
+ensemble:
+  # Model paths and assignments
+  models:
+    v1:
+      name: "Momentum Specialist"
+      path: "production/models/v1_20251003_131020"
+      description: "Aggressive model optimized for bull markets"
+      use_for: ["bull", "neutral"]  # Use v1 for bull and neutral regimes
+
+    v2:
+      name: "Defensive Specialist"
+      path: "production/models/v2_defensive_20251003_212109"
+      description: "Defensive model optimized for bear markets and corrections"
+      use_for: ["bear"]  # Use v2 only for bear regimes
+
+  # Default model for neutral/unclear regimes
+  primary_model: "v1"
+
+  # Regime Detection Parameters
+  regime_detection:
+    # Drawdown threshold: Switch to defensive when portfolio drops X% from peak
+    drawdown_threshold: -0.10  # -10% triggers bear regime
+
+    # Volatility threshold: Switch to defensive when volatility exceeds threshold
+    volatility_threshold: 0.025  # 2.5% daily volatility (annualized)
+
+    # Consecutive loss threshold: Switch to defensive after N losing days
+    consecutive_loss_threshold: 5  # 5 consecutive losses
+
+    # Hysteresis: Days to wait before confirming regime switch (prevents rapid switching)
+    hysteresis_days: 3  # Require 3-day confirmation
+
+    # Volatility calculation window
+    volatility_window: 10  # 10-day rolling window
+
+    # Trend detection window (moving average)
+    trend_window: 20  # 20-day moving average for trend
+
+  # Backtesting Configuration
+  backtesting:
+    initial_capital: 100000  # Starting capital for backtests
+
+    # Test periods for validation
+    test_periods:
+      # Q1 2025 - Bull market (expect v1 dominance)
+      q1_2025:
+        name: "Q1 2025 Bull Market"
+        start: "2025-01-01"
+        end: "2025-03-31"
+        expected_regime: "bull"
+        expected_model: "v1"
+
+      # Q3 2025 - Correction (expect v2 activation)
+      q3_2025:
+        name: "Q3 2025 Correction"
+        start: "2025-07-01"
+        end: "2025-09-26"
+        expected_regime: "bear"
+        expected_model: "v2"
+
+      # Full 2025 YTD - Complete test
+      ytd_2025:
+        name: "2025 YTD"
+        start: "2025-01-01"
+        end: "2025-09-26"
+        expected_regime: "mixed"
+        expected_model: "ensemble"
+
+  # Performance Targets
+  performance_targets:
+    # Minimum acceptable return vs Equal Weight baseline
+    min_return_vs_ew: 0.02  # 2% outperformance
+
+    # Minimum acceptable Sharpe ratio
+    min_sharpe: 0.8
+
+    # Maximum acceptable drawdown
+    max_drawdown: -0.15  # -15%
+
+    # Expected annualized return
+    expected_return:
+      bull_market: 0.13  # 13% in bull markets (v1)
+      bear_market: 0.00  # 0% in bear markets (v2 protection)
+      overall: 0.12      # 12% overall ensemble
+
+  # Logging and Monitoring
+  logging:
+    level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+
+    # Log regime changes
+    log_regime_changes: true
+
+    # Log model switches
+    log_model_switches: true
+
+    # Save daily regime and model usage
+    save_daily_logs: true
+
+    # Output directory for ensemble logs
+    log_directory: "production/logs/ensemble"
+
+  # Risk Management
+  risk_management:
+    # Force defensive model if drawdown exceeds emergency threshold
+    emergency_drawdown: -0.15  # -15% emergency switch
+
+    # Maximum consecutive days in single regime before review
+    max_days_single_regime: 60  # Review if stuck in one regime for 60 days
+
+    # Minimum model usage balance (prevent over-reliance on single model)
+    min_model_usage: 0.10  # Each model should be used at least 10% of the time over long periods

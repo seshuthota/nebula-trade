@@ -1,0 +1,56 @@
+================================================================================
+QUICK RESUME INSTRUCTIONS
+================================================================================
+
+YOUR CHECKPOINT: ✓ Found at 400,000 steps
+
+COMMAND TO RUN NOW:
+
+    python resume_training.py \
+        models/20250930_225350/portfolio_model_400000_steps.zip \
+        --steps 600000
+
+WHAT THIS DOES:
+  - Loads your 400K checkpoint
+  - Trains for 600K MORE steps
+  - Total: 1,000,000 steps (as originally planned)
+  - Time: ~2 hours
+  - Uses GPU automatically
+  - Saves new checkpoints
+
+ALTERNATIVE (use best validation checkpoint):
+
+    python resume_training.py \
+        models/20250930_225350/best_model.zip \
+        --steps 600000
+
+MONITOR DURING TRAINING:
+
+  Terminal 1: Training
+    python resume_training.py models/20250930_225350/portfolio_model_400000_steps.zip --steps 600000
+
+  Terminal 2: GPU usage
+    watch -n 1 nvidia-smi
+
+  Terminal 3: TensorBoard (optional)
+    tensorboard --logdir ./tensorboard_logs/
+
+WHAT TO EXPECT:
+  - Should start immediately (loading checkpoint)
+  - GPU usage: 80-90%
+  - Speed: ~85-95 steps/second
+  - Duration: ~1 hour 54 minutes for 600K steps
+  - New checkpoints every 10K steps
+  - Final model saved to: models/TIMESTAMP_resumed/final_model.zip
+
+AFTER COMPLETION:
+  - Run full evaluation pipeline
+  - Compare with classical methods
+  - Expected: 20-28% returns (vs current 10%)
+
+================================================================================
+COPY & PASTE THIS COMMAND:
+
+python resume_training.py models/20250930_225350/portfolio_model_400000_steps.zip --steps 600000
+
+================================================================================

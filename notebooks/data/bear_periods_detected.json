@@ -1,0 +1,38 @@
+{
+  "bear_periods": [
+    {
+      "start_date": "2015-08-25",
+      "end_date": "2015-09-16",
+      "metrics": {
+        "max_drawdown": -0.18424777411498622,
+        "avg_volatility": 0.02409594046035036,
+        "cumulative_return": -0.016420436114138792,
+        "num_down_days": 10,
+        "duration": 17
+      }
+    },
+    {
+      "start_date": "2020-03-12",
+      "end_date": "2020-04-29",
+      "metrics": {
+        "max_drawdown": -0.4307549409890248,
+        "avg_volatility": 0.051900037849341704,
+        "cumulative_return": -0.1088921796264023,
+        "num_down_days": 15,
+        "duration": 31
+      }
+    },
+    {
+      "start_date": "2020-05-07",
+      "end_date": "2020-05-29",
+      "metrics": {
+        "max_drawdown": -0.18428225471863532,
+        "avg_volatility": 0.033871655446827,
+        "cumulative_return": 0.004219730585914405,
+        "num_down_days": 8,
+        "duration": 16
+      }
+    }
+  ],
+  "total_count": 3
+}

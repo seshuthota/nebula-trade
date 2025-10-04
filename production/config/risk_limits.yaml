@@ -1,0 +1,151 @@
+# Risk Management Configuration for Live Trading
+# CRITICAL: These limits protect capital and prevent catastrophic losses
+
+# Position Limits (Hard Constraints)
+position_limits:
+  max_weight_per_stock: 0.40    # No more than 40% in single stock
+  min_weight_per_stock: 0.05    # Maintain diversification (5% minimum)
+  max_daily_turnover: 0.30      # Limit trading frequency (30% max)
+  min_cash_reserve: 0.05        # Keep 5% cash buffer
+  max_leverage: 1.0             # No leverage initially
+
+# Circuit Breakers (Auto-Pause Trading)
+circuit_breakers:
+  enabled: true
+
+  # Daily loss limit
+  max_daily_loss_percent: 5.0       # Pause if >5% loss in one day
+  max_daily_loss_absolute: 5000     # Pause if >₹5000 loss in one day
+
+  # Weekly loss limit
+  max_weekly_loss_percent: 10.0     # Pause if >10% loss in one week
+  max_weekly_loss_absolute: 10000   # Pause if >₹10000 loss in one week
+
+  # Drawdown limit
+  max_drawdown_percent: 15.0        # Pause if >15% drawdown from peak
+
+  # Single stock loss
+  max_single_stock_loss: 8.0        # Pause if any stock down >8%
+
+  # Portfolio value threshold
+  min_portfolio_value_percent: 80.0  # Pause if value drops below 80% of initial
+
+  # Anomalous positions
+  max_single_position_percent: 50.0  # Alert if any position >50%
+  min_positions_count: 3             # Alert if holding <3 stocks
+
+# Alert Thresholds (Warning, Not Auto-Pause)
+alerts:
+  # Large trades
+  large_trade_threshold: 0.10       # Alert if single trade >10% of portfolio
+
+  # Position changes
+  large_weight_change: 0.20         # Alert if weight changes >20%
+
+  # Performance
+  negative_days_threshold: 3        # Alert after 3 consecutive negative days
+  low_sharpe_threshold: 0.5         # Alert if monthly Sharpe <0.5
+
+  # Volume anomalies
+  zero_volume_threshold: 0.05       # Alert if >5% of stocks have zero volume
+
+# Execution Controls
+execution:
+  # Order validation
+  max_order_size_percent: 0.15      # No single order >15% of portfolio
+  min_order_size_rupees: 1000       # Min order size ₹1000
+
+  # Slippage monitoring
+  max_acceptable_slippage: 0.005    # Alert if slippage >0.5%
+  cancel_if_slippage_exceeds: 0.02  # Cancel order if slippage >2%
+
+  # Order timeout
+  order_timeout_minutes: 30         # Cancel orders after 30 minutes
+
+# Recovery Procedures
+recovery:
+  # After circuit breaker trigger
+  pause_duration_hours: 24          # Pause trading for 24 hours
+  require_manual_approval: true     # Need manual approval to resume
+
+  # Automatic rollback conditions
+  enable_auto_rollback: true
+  rollback_if_loss_exceeds: 0.15    # Rollback to previous model if >15% loss
+
+# Monitoring & Logging
+monitoring:
+  # Log all trades
+  log_all_trades: true
+  log_all_decisions: true
+
+  # Performance tracking
+  track_slippage: true
+  track_transaction_costs: true
+
+  # Health checks
+  check_data_quality: true
+  check_model_health: true
+
+# Emergency Contacts
+emergency:
+  # Auto-liquidate conditions (EXTREME)
+  enable_auto_liquidate: false      # DO NOT enable without careful consideration
+  liquidate_if_loss_exceeds: 0.30   # Only if >30% total loss (disabled by default)
+
+  # Manual intervention
+  emergency_stop_enabled: true      # Allow manual emergency stop
+  emergency_contact_email: null     # Configure for production
+  emergency_contact_sms: null       # Configure for production
+
+# Paper Trading Overrides
+paper_trading:
+  # Relaxed limits for paper trading
+  use_relaxed_limits: true
+  max_daily_loss_percent: 10.0      # Higher tolerance for testing
+  max_drawdown_percent: 20.0        # Higher tolerance for testing
+  pause_on_circuit_breaker: false   # Don't pause, just log
+
+# Live Trading (Strict)
+live_trading:
+  # Strict enforcement
+  enforce_all_limits: true
+  zero_tolerance_mode: true         # Pause immediately on any violation
+
+  # Additional safety
+  require_2fa_for_trades: false     # Future: Two-factor auth
+  daily_approval_required: false    # Future: Daily approval to trade
+
+---
+
+# Risk Limit Explanations
+
+# Position Limits:
+# - Prevent concentration risk
+# - Ensure diversification
+# - Limit over-trading
+
+# Circuit Breakers:
+# - Automatic safety net
+# - Prevent catastrophic losses
+# - Pause trading when anomalies detected
+
+# Alerts:
+# - Early warning system
+# - Not auto-pause (need monitoring)
+# - Help detect issues before they become critical
+
+# Execution Controls:
+# - Validate orders before submission
+# - Monitor execution quality
+# - Prevent fat-finger errors
+
+# Recovery Procedures:
+# - How to resume after pause
+# - When to rollback to previous model
+# - Manual approval requirements
+
+# IMPORTANT:
+# - Review these limits based on your risk tolerance
+# - Adjust for account size and strategy
+# - Test in paper trading first
+# - Monitor closely during live trading

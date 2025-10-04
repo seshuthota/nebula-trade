@@ -1,0 +1,61 @@
+# Ensemble Configuration - VERY STICKY BEAR (7-day exit)
+#
+# Strategy: Very asymmetric hysteresis - Very easy to enter BEAR, very hard to exit
+# Hypothesis: Further reduce Q3 whipsaw by requiring 7 days to exit BEAR
+
+ensemble:
+  models:
+    v1:
+      name: "Momentum Specialist"
+      path: "production/models/v1_20251003_131020"
+      description: "Aggressive model optimized for bull markets"
+      use_for: ["bull", "neutral"]
+
+    v2:
+      name: "Defensive Specialist"
+      path: "production/models/v2_defensive_20251003_212109"
+      description: "Defensive model optimized for bear markets and corrections"
+      use_for: ["bear"]
+
+  primary_model: "v1"
+
+  # Regime Detection Parameters with VERY ASYMMETRIC HYSTERESIS
+  regime_detection:
+    # Entry thresholds (same as before)
+    drawdown_threshold: -0.10  # -10% triggers bear
+    volatility_threshold: 0.025  # 2.5% daily volatility
+    consecutive_loss_threshold: 5  # 5 consecutive losses
+
+    # VERY ASYMMETRIC HYSTERESIS: Very easy to enter BEAR, very hard to exit
+    hysteresis_days: 3  # Enter any regime after 3 days
+    bear_exit_hysteresis_days: 7  # 🔒🔒 VERY STICKY: Require 7 days to exit BEAR
+
+    # Detection windows
+    volatility_window: 10
+    trend_window: 20
+    ma_short_window: 50
+    ma_long_window: 200
+
+  # Performance Targets
+  performance_targets:
+    min_return_vs_ew: 0.02
+    min_sharpe: 0.8
+    max_drawdown: -0.15
+    expected_return:
+      bull_market: 0.13
+      bear_market: 0.00
+      overall: 0.12
+
+  # Logging
+  logging:
+    level: "INFO"
+    log_regime_changes: true
+    log_model_switches: true
+    save_daily_logs: true
+    log_directory: "production/logs/ensemble"
+
+  # Risk Management
+  risk_management:
+    emergency_drawdown: -0.15
+    max_days_single_regime: 60
+    min_model_usage: 0.10

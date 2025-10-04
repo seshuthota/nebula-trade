@@ -1,0 +1,137 @@
+{
+  "bear_periods": [
+    {
+      "start_date": "2007-02-28",
+      "end_date": "2007-03-23",
+      "metrics": {
+        "max_drawdown": -0.194617769702449,
+        "avg_volatility": 0.023159497640596726,
+        "cumulative_return": 0.07401792004254348,
+        "num_down_days": 7,
+        "duration": 18
+      }
+    },
+    {
+      "start_date": "2008-01-29",
+      "end_date": "2008-04-16",
+      "metrics": {
+        "max_drawdown": -0.3268470872377311,
+        "avg_volatility": 0.03532344810039691,
+        "cumulative_return": -0.30308203773188924,
+        "num_down_days": 30,
+        "duration": 53
+      }
+    },
+    {
+      "start_date": "2008-05-22",
+      "end_date": "2008-07-22",
+      "metrics": {
+        "max_drawdown": -0.3567017678504405,
+        "avg_volatility": 0.031842952343368654,
+        "cumulative_return": -0.19345681330859854,
+        "num_down_days": 26,
+        "duration": 44
+      }
+    },
+    {
+      "start_date": "2008-10-03",
+      "end_date": "2008-12-17",
+      "metrics": {
+        "max_drawdown": -0.3884544018568269,
+        "avg_volatility": 0.04891303946739077,
+        "cumulative_return": -0.24614802021915416,
+        "num_down_days": 25,
+        "duration": 49
+      }
+    },
+    {
+      "start_date": "2009-01-09",
+      "end_date": "2009-03-24",
+      "metrics": {
+        "max_drawdown": -0.28325461658635953,
+        "avg_volatility": 0.03284206754499271,
+        "cumulative_return": -0.19024158332730046,
+        "num_down_days": 26,
+        "duration": 49
+      }
+    },
+    {
+      "start_date": "2010-12-08",
+      "end_date": "2010-12-28",
+      "metrics": {
+        "max_drawdown": -0.15691965359719226,
+        "avg_volatility": 0.021603816044351208,
+        "cumulative_return": -0.008277255709029596,
+        "num_down_days": 8,
+        "duration": 14
+      }
+    },
+    {
+      "start_date": "2011-12-12",
+      "end_date": "2011-12-23",
+      "metrics": {
+        "max_drawdown": -0.19804005513969633,
+        "avg_volatility": 0.021925462671843348,
+        "cumulative_return": -0.04828781943482896,
+        "num_down_days": 6,
+        "duration": 10
+      }
+    },
+    {
+      "start_date": "2013-07-24",
+      "end_date": "2013-08-13",
+      "metrics": {
+        "max_drawdown": -0.15879676174341506,
+        "avg_volatility": 0.021516347887321652,
+        "cumulative_return": -0.04525323004613002,
+        "num_down_days": 8,
+        "duration": 14
+      }
+    },
+    {
+      "start_date": "2013-08-16",
+      "end_date": "2013-09-04",
+      "metrics": {
+        "max_drawdown": -0.23186451118844825,
+        "avg_volatility": 0.022666345856754335,
+        "cumulative_return": -0.08427835573554876,
+        "num_down_days": 7,
+        "duration": 14
+      }
+    },
+    {
+      "start_date": "2015-08-25",
+      "end_date": "2015-09-16",
+      "metrics": {
+        "max_drawdown": -0.18424775361837817,
+        "avg_volatility": 0.02409594122753283,
+        "cumulative_return": -0.016420378059424978,
+        "num_down_days": 10,
+        "duration": 17
+      }
+    },
+    {
+      "start_date": "2020-03-12",
+      "end_date": "2020-04-29",
+      "metrics": {
+        "max_drawdown": -0.43075498044382576,
+        "avg_volatility": 0.05190004674805678,
+        "cumulative_return": -0.10889217510257776,
+        "num_down_days": 15,
+        "duration": 31
+      }
+    },
+    {
+      "start_date": "2020-05-07",
+      "end_date": "2020-05-29",
+      "metrics": {
+        "max_drawdown": -0.18428209895570133,
+        "avg_volatility": 0.033871645916998996,
+        "cumulative_return": 0.0042198345991910635,
+        "num_down_days": 8,
+        "duration": 16
+      }
+    }
+  ],
+  "total_count": 12
+}

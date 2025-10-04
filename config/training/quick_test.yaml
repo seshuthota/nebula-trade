@@ -1,0 +1,48 @@
+# Quick Test Training Configuration
+# Fast training for testing and debugging
+
+training:
+  # Quick training
+  total_timesteps: 10000  # Just 10k steps for testing
+  n_parallel_envs: 2      # Fewer parallel envs
+  
+  # Data split
+  data_split:
+    train: 0.80
+    val: 0.20
+  
+  # Minimal checkpointing
+  checkpoint:
+    save_freq: 5000
+    save_best: false
+    eval_freq: 2500
+  
+  # Optimization
+  optimization:
+    use_gpu: true
+    vec_normalize: true
+    n_eval_episodes: 3
+  
+  # Minimal logging
+  logging:
+    use_wandb: false  # Disable wandb for quick tests
+    project: "nebula-trade-test"
+    entity: null
+    log_freq: 1000
+    verbose: 2  # More verbose for debugging
+  
+  # Minimal callbacks
+  callbacks:
+    - type: "checkpoint"
+      params:
+        save_freq: 5000
+        save_path: null
+    - type: "eval"
+      params:
+        eval_freq: 2500
+        n_eval_episodes: 3
+
+resume:
+  enabled: false
+  checkpoint_path: null
+  reset_timesteps: false

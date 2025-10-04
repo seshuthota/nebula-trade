@@ -1,0 +1,25 @@
+portfolio:
+  name: "NIFTY Bank Small Portfolio"
+  assets:
+    - "HDFCBANK.NS"
+    - "ICICIBANK.NS"
+    - "SBIN.NS"
+    - "AXISBANK.NS"
+    - "KOTAKBANK.NS"
+  initial_weights:
+    mode: "equal"
+    cash_buffer: 0.1  # 10% cash initially
+  constraints:
+    min_weight: 0.0   # No shorting
+    max_weight: 1.0   # Max per asset
+    turnover_threshold: 0.01  # Min change to trigger rebalance
+  rebalance:
+    frequency: "daily"
+    transaction_cost: 0.0003  # 0.03% per trade (reduced from 0.1% to encourage trading)
+  data:
+    interval: "daily"
+    lookback_days: 3650  # ~10 years
+    start_date: "2015-01-01"
+  training:
+    test_split_ratio: 0.2
+    walk_forward_window: 252  # ~1 year

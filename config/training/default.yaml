@@ -1,0 +1,52 @@
+# Default Training Configuration
+# Used when no specific training config is provided
+
+training:
+  # Training parameters
+  total_timesteps: 1000000
+  n_parallel_envs: 6
+  
+  # Data split
+  data_split:
+    train: 0.90
+    val: 0.10
+  
+  # Checkpointing
+  checkpoint:
+    save_freq: 100000
+    save_best: true
+    eval_freq: 10000
+  
+  # Optimization
+  optimization:
+    use_gpu: true
+    vec_normalize: true
+    n_eval_episodes: 20
+  
+  # WandB logging
+  logging:
+    use_wandb: true
+    project: "nebula-trade-portfolio"
+    entity: null
+    log_freq: 1000
+    verbose: 1
+  
+  # Callbacks
+  callbacks:
+    - type: "checkpoint"
+      params:
+        save_freq: 100000
+        save_path: null  # Auto-generated
+    - type: "eval"
+      params:
+        eval_freq: 10000
+        n_eval_episodes: 5
+    - type: "wandb"
+      params:
+        log_freq: 1000
+
+# Resume training
+resume:
+  enabled: false
+  checkpoint_path: null
+  reset_timesteps: false
